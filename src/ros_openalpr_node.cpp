@@ -30,11 +30,11 @@ public:
     recognizer_.setDefaultRegion(region_pattern);
     if (recognizer_.isLoaded())
     {
-      ROS_INFO_NAMED(ros::this_node::getName(), "OpenALPR loaded");
+      ROS_INFO("OpenALPR loaded");
     }
     else
     {
-      ROS_FATAL_NAMED(ros::this_node::getName(), "Failed to load OpenALPR");
+      ROS_FATAL("Failed to load OpenALPR");
     }
     // Wire up ROS connections
     image_sub_ =
@@ -43,8 +43,7 @@ public:
         nh_.advertise<ros_openalpr::PlatesResults>(plates_topic, 1, false);
     // Check what transport we're using for camera images
     const std::string transport_in = image_sub_.getTransport();
-    ROS_INFO_NAMED(ros::this_node::getName(),
-                   "Subscribed using %s for transport", transport_in.c_str());
+    ROS_INFO("Subscribed using %s for transport", transport_in.c_str());
   }
 
   void Loop(const double loop_frequency)
